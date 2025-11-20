@@ -6,12 +6,11 @@
     <title>تواصل معنا | Cewolt</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* الخلفية الأساسية */
+        /* الخلفية الأساسية: صورة الجهاز الاحترافي */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, #0f0f0f, #000);
             color: #fff;
             height: 100vh;
             display: flex;
@@ -20,9 +19,23 @@
             justify-content: center;
             overflow: hidden;
             position: relative;
+            background: url('https://i.imgur.com/8dX6Q7u.jpg') center/cover no-repeat;
+            background-attachment: fixed;
         }
 
-        /* تأثير الخيوط (الخلفية الأساسية) */
+        /* تعتيم الخلفية لجعل المحتوى واضحًا */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+
+        /* تأثير الخيوط (فوق التعتيم) */
         .wireframe {
             position: absolute;
             top: 0;
@@ -33,7 +46,7 @@
                 linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
             background-size: 30px 30px;
-            z-index: 1;
+            z-index: 2;
             animation: moveWireframe 20s linear infinite;
         }
 
@@ -42,7 +55,7 @@
             100% { transform: translate(30px, 30px); }
         }
 
-        /* الشعار الشفاف في الخلفية (الأهم) */
+        /* الشعار الشفاف في الخلفية (مهم جدًا — لم يُمس) */
         .watermark {
             position: absolute;
             top: 0;
@@ -50,7 +63,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 2;
+            z-index: 3;
             opacity: 0.08;
             background-image: 
                 repeating-linear-gradient(
@@ -77,13 +90,13 @@
             100% { transform: translateX(100%) rotate(-45deg); }
         }
 
-        /* محتوى الصفحة الأمامي */
+        /* محتوى الصفحة الأمامي — مظلل بسياج شفاف */
         .container {
             text-align: center;
             padding: 20px;
             max-width: 500px;
             position: relative;
-            z-index: 10;
+            z-index: 4;
             background: rgba(10, 10, 10, 0.6);
             border-radius: 20px;
             backdrop-filter: blur(10px);
@@ -96,6 +109,8 @@
             margin-bottom: 30px;
             filter: brightness(1.3);
             transition: transform 0.3s ease;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
         }
 
         .logo:hover {
@@ -187,13 +202,12 @@
 </head>
 <body>
 
-    <!-- تأثير الخيوط -->
+    <!-- خلفية الصورة + التعتيم + الخيوط + الشعار الشفاف -->
     <div class="wireframe"></div>
-
-    <!-- الشعار الشفاف في الخلفية -->
     <div class="watermark">أجهزة استقبال - بروابيل - تلفزيون ذكي</div>
 
     <div class="container">
+        <!-- الشعار (الصورة الأصلية) — تبقى كما هي -->
         <img src="https://cewolt.tn/wp-content/uploads/2025/05/TTTT-1024x250-2.png" alt="Cewolt" class="logo">
 
         <h2>هل تحتاج مساعدة في جهازك الذكي؟</h2>
